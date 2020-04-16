@@ -17,10 +17,11 @@ namespace Todo.Api.Controllers
     [HttpGet]
      public IActionResult GetTodos()
      {
-         var result = new List<TodoItem>(){
-             new TodoItem{ Id = 1, Action="Thing one.", IsDone=true},
-             new TodoItem{ Id = 2, Action="Thing two.", IsDone=false},
-         };
+         var result = repository.GetAllTodoItems();
+         if (result == null)
+         {
+             return NotFound();
+         }
          return Ok(result);
      }   
     }
